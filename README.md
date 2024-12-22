@@ -4,7 +4,7 @@
 
 The idea behind this small repository is to provide a low-tech YAML-based orchestration framework for Python.
 
-One advantage of this framework is that it allows for the seamless integration and swapping of different modules without the use of wrapper classes, making the approach "modular",
+One advantage of this framework is that it allows for the seamless integration and swapping of different modules without the use of wrapper classes, making the approach fairly "modular"
 
 The originally intended use case is the subsequent execution of steps in a modelling pipeline, hence the name **Modular Modelling**.
 
@@ -29,8 +29,8 @@ The run configs contain a list of steps in the order in which they need to be ru
 - step1: step1_example
 - step2: step2_example
 ```
-Then, each of the run configs are read and passed to the main function `src.run.main.main`.
-This function dynamically imports the main functions from `src.modules.<STEP>.main.main` for each step specified in the run config
+Then, each of the run configs are read and passed to the function `src.run.main.main`.
+This function dynamically imports the `main` functions from `src.modules.<STEP>.main` for each step specified in the run config
 and passes the config dictionaries read from `cfg/modules/<STEP>` as inputs.
 ```python
 # Construct step main module path
