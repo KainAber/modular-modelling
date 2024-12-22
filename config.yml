@@ -1,0 +1,3 @@
+run:
+  - run_example_1
+  - run_example_2
