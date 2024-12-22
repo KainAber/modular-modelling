@@ -1,5 +1,5 @@
-import importlib
 from pathlib import Path
+
 import yaml
 
 from src.run import main as run_main
@@ -25,7 +25,7 @@ def main(cfg: dict) -> None:
         run_main.main(run_cfg)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Create project root path
     project_root_folder_path = Path(__file__).resolve().parents[0]
 

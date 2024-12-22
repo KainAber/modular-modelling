@@ -17,7 +17,13 @@ def main(cfg: dict) -> None:
         project_root_folder_path = Path(__file__).resolve().parents[2]
 
         # Construct step config path
-        step_cfg_path = project_root_folder_path / "cfg" / "modules" / step_name / f"{step_cfg_name}.yml"
+        step_cfg_path = (
+            project_root_folder_path
+            / "cfg"
+            / "modules"
+            / step_name
+            / f"{step_cfg_name}.yml"
+        )
 
         # Read step config
         with open(step_cfg_path, "r") as file:
