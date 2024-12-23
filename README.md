@@ -4,7 +4,7 @@
 
 The idea behind this small repository is to provide a low-tech YAML-based orchestration framework for Python.
 
-One advantage of this framework is that it allows for the integration and swapping of different modules 
+One advantage of this framework is that it allows for the integration and swapping of different modules
 (provided they have the correct I/O),
 making the approach fairly "modular".
 
@@ -54,7 +54,7 @@ run:
   - run_example_1
   - run_example_2
 ```
-Then, each of the run configs are read and passed to the function `src.run.main.main`. 
+Then, each of the run configs are read and passed to the function `src.run.main.main`.
 The run configs contain a list of steps with step config names in the order in which they need to be run:
 ```YAML
 - step1: step1_example
