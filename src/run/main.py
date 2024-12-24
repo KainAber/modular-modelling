@@ -5,8 +5,11 @@ import yaml
 
 
 def main(cfg: dict) -> None:
+    # Retrieve steps
+    steps = cfg["steps"]
+
     # Iterate through steps
-    for step_dict in cfg:
+    for step_dict in steps:
         # Extract step name
         step_name = next(iter(step_dict))
 

@@ -50,15 +50,16 @@ The module `main.py` in the project root is the entry point to the pipeline.
 It reads the `config.yml` which specifies the runs that need to be executed (in order).
 The runs are specified via the file names of run configs stored in `cfg/run` (without the suffix `.yml`):
 ```YAML
-run:
+runs:
   - run_example_1
   - run_example_2
 ```
 Then, each of the run configs are read and passed to the function `src.run.main.main`.
 The run configs contain a list of steps with step config names in the order in which they need to be run:
 ```YAML
-- step1: step1_example
-- step2: step2_example
+steps:
+  - step1: step1_example
+  - step2: step2_example
 ```
 The function `src.run.main.main` goes through each step specified in the run config and dynamically imports the `main` functions from `src.modules.<STEP>.main`.
 It then reads and passes the config dictionaries from `cfg/modules/<STEP>` as inputs to the imported functions.

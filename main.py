@@ -7,7 +7,7 @@ from src.run import main as run_main
 
 def main(cfg: dict) -> None:
     # Extract all runs
-    run_list = cfg["run"]
+    run_list = cfg["runs"]
 
     # Iterate through runs
     for run_name in run_list:
