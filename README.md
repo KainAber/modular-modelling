@@ -14,6 +14,7 @@ Intended audiences for this repository include:
 - Developers who are not intimately familiar with the use of config files to separate run settings from source code
 - Project teams that benefit from a clear distinction between "modeller" and "developer" roles
 - Developers who are aiming to build a pipeline out of various modules and need a sensible starting place
+- Sets of project teams that work on similar problems and can benefit from sharing pipeline components 
 
 ## Repo structure
 
