@@ -1,3 +1,5 @@
 steps:
-  - step1: step1_example
-  - step2: step2_example
+  - step: step1
+    config: step1_example
+  - step: step2
+    config: step2_example

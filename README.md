@@ -14,7 +14,7 @@ Intended audiences for this repository include:
 - Developers who are not intimately familiar with the use of config files to separate run settings from source code
 - Project teams that benefit from a clear distinction between "modeller" and "developer" roles
 - Developers who are aiming to build a pipeline out of various modules and need a sensible starting place
-- Sets of project teams that work on similar problems and can benefit from sharing pipeline components 
+- Sets of project teams that work on similar problems and can benefit from sharing pipeline components
 
 ## Repo structure
 
@@ -59,11 +59,13 @@ Then, each of the run configs are read and passed to the function `src.run.main.
 The run configs contain a list of steps with step config names in the order in which they need to be run:
 ```YAML
 steps:
-  - step1: step1_example
-  - step2: step2_example
+  - step: step1
+    config: step1_example
+  - step: step2
+    config: step2_example
 ```
-The function `src.run.main.main` goes through each step specified in the run config and dynamically imports the `main` functions from `src.modules.<STEP>.main`.
-It then reads and passes the config dictionaries from `cfg/modules/<STEP>` as inputs to the imported functions.
+The function `src.run.main.main` goes through each step specified in the run config and dynamically imports the `main` functions from `src.modules.<step>.main`.
+It then reads and passes each config dictionary from `cfg/modules/<step>/<config>.yml` as input to the imported functions.
 ```python
 # Read step config
 with open(step_cfg_path, "r") as file:

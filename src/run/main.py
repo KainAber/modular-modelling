@@ -11,10 +11,10 @@ def main(cfg: dict) -> None:
     # Iterate through steps
     for step_dict in steps:
         # Extract step name
-        step_name = next(iter(step_dict))
+        step_name = step_dict["step"]
 
         # Extract step cfg
-        step_cfg_name = step_dict[step_name]
+        step_cfg_name = step_dict["config"]
 
         # Create project root path
         project_root_folder_path = Path(__file__).resolve().parents[2]
