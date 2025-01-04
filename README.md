@@ -19,26 +19,26 @@ Intended audiences for this repository include:
 ## Repo structure
 
 ```shell
-├── cfg                                 #-Contains all configs (except the main one)
-│    ├── modules                          #-Contains all step configs
-│    │    ├── step1                         # Contains all step1 configs
-│    │    │    └── step1_example.yml          # Specifies a step1 execution (dummy)
-│    │    └── step2                         # Contains all step2 configs
-│    │         ├── step2_example.yml          # Specifies a step2 execution (dummy)
-│    │         └── step2_example_2.yml        # Specifies a step2 execution (dummy)
-│    └── run                              #-Contains all run configs
-│         ├── run_example_1.yml             # Specifies step configs for a run
-│         └── run_example_2.yml             # Specifies step configs for a run
-├── src                                 #-Contains all source code (except the main)
-│    ├── modules                          #-Contains all available modules
-│    │    ├── step1                         # Contains step1 code
-│    │    │    └── main.py                    # Executes step1 (dummy)
-│    │    └── step2                         # Contains step2 code
-│    │         └── main.py                    # Executes step2 (dummy)
-│    └── run                              #-Contains the run module
-│         └── main.py                       #-Dynamically calls steps on step configs
-├── config.yml                          # Specifies the runs to execute
-├── main.py                             #-Calls the run module
+├── cfg                                 #-Contains configs for modules and runs
+│    ├── modules                          #-Contains configs for modules
+│    │    ├── mod1                          # Contains configs for module 'mod1'
+│    │    │    └── mod1_example.yml           # Specifies a mod1 execution (dummy)
+│    │    └── mod2                          # Contains configs for module 'mod2'
+│    │         ├── mod2_example.yml           # Specifies a mod2 execution (dummy)
+│    │         └── mod2_example_2.yml         # Specifies a mod2 execution (dummy)
+│    └── run                              #-Contains configs for runs
+│         ├── run_example_1.yml             # Specifies module configs for a run
+│         └── run_example_2.yml             # Specifies module configs for a run
+├── src                                 #-Contains source code for modules and runs
+│    ├── modules                          #-Contains available modules
+│    │    ├── mod1                          # Contains code for module 'mod1'
+│    │    │    └── main.py                    # Executes module 'mod1' (dummy)
+│    │    └── mod2                          # Contains code for module 'mod2'
+│    │         └── main.py                    # Executes module 'mod2' (dummy)
+│    └── run                              #-Contains code for runs
+│         └── main.py                       #-Executes a run by dynamically calling modules
+├── config.yml                          # Specifies the run executions
+├── main.py                             #-Executes runs by calling the run module on each run
 └── requirements.txt                    # Contains required packages
 ```
 
@@ -72,12 +72,12 @@ step_cfg_path = (
     project_root_folder_path
     / "cfg"
     / "modules"
-    / step_name
+    / step_module_name
     / f"{step_cfg_name}.yml"
 )
 
 # Construct step main module path
-step_main_module_path = f"src.modules.{step_name}.main"
+step_main_module_path = f"src.modules.{step_module_name}.main"
 
 # Import main step module
 step_main_module = importlib.import_module(step_main_module_path)

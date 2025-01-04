@@ -14,8 +14,8 @@ def main(cfg_path: Path) -> None:
 
     # Iterate through steps
     for step_dict in steps:
-        # Extract step name
-        step_name = step_dict["step"]
+        # Extract module name
+        step_module_name = step_dict["module"]
 
         # Extract step cfg
         step_cfg_name = step_dict["config"]
@@ -28,12 +28,12 @@ def main(cfg_path: Path) -> None:
             project_root_folder_path
             / "cfg"
             / "modules"
-            / step_name
+            / step_module_name
             / f"{step_cfg_name}.yml"
         )
 
         # Construct step main module path
-        step_main_module_path = f"src.modules.{step_name}.main"
+        step_main_module_path = f"src.modules.{step_module_name}.main"
 
         # Import main step module
         step_main_module = importlib.import_module(step_main_module_path)
