@@ -42,7 +42,7 @@ Intended audiences for this repository include:
 └── requirements.txt                    # Contains required packages
 ```
 
-Files and folder names commented with `#-` are designed not to be modified by the user.
+Files and folder names commented with `#-` are designed to not be modified by the user.
 
 ## How it works
 
@@ -55,7 +55,7 @@ runs:
   - run_example_1
   - run_example_2
 ```
-Then, each of the run configs are read and passed to the function `src.run.main.main`.
+Then, each run config path is constructed and passed to the function `src.run.main.main`.
 The run configs contain a list of steps with step config names in the order in which they need to be run:
 ```YAML
 steps:
@@ -65,11 +65,16 @@ steps:
     config: step2_example
 ```
 The function `src.run.main.main` goes through each step specified in the run config and dynamically imports the `main` functions from `src.modules.<step>.main`.
-It then reads and passes each config dictionary from `cfg/modules/<step>/<config>.yml` as input to the imported functions.
+It then passes each step config path `cfg/modules/<step>/<config>.yml` as a `Path` object as input to the imported functions.
 ```python
-# Read step config
-with open(step_cfg_path, "r") as file:
-    step_cfg = yaml.safe_load(file)
+# Construct step config path
+step_cfg_path = (
+    project_root_folder_path
+    / "cfg"
+    / "modules"
+    / step_name
+    / f"{step_cfg_name}.yml"
+)
 
 # Construct step main module path
 step_main_module_path = f"src.modules.{step_name}.main"
@@ -80,14 +85,14 @@ step_main_module = importlib.import_module(step_main_module_path)
 # Get step main function
 step_main_func = getattr(step_main_module, "main")
 
-# Execute main on config
-step_main_func(step_cfg)
+# Execute main on config path
+step_main_func(step_cfg_path)
 ```
 
 ## Adding modules
 
 To add a new module, simply create a folder inside `src/modules`, e.g., `step3` containing the module code with a `main.py` file.
-This `main.py`file needs to contain a function called `main` taking a dictionary as input which can be constructed from reading a `.yml` file.
+This `main.py`file needs to contain a function called `main` taking a `Path` object as input pointing to a `.yml` file.
 
 Additionally create a folder inside `src/cfg/modules` of the same name (`step3`) in order to store `.yml` configuration files for the module.
 
