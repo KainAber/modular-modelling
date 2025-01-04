@@ -59,13 +59,13 @@ Then, each run config path is constructed and passed to the function `src.run.ma
 The run configs contain a list of steps with step config names in the order in which they need to be run:
 ```YAML
 steps:
-  - step: step1
-    config: step1_example
-  - step: step2
-    config: step2_example
+  - module: mod1
+    config: mod1_example
+  - module: mod2
+    config: mod2_example
 ```
 The function `src.run.main.main` goes through each step specified in the run config and dynamically imports the `main` functions from `src.modules.<step>.main`.
-It then passes each step config path `cfg/modules/<step>/<config>.yml` as a `Path` object as input to the imported functions.
+It then passes each step config path `cfg/modules/<module>/<config>.yml` as a `Path` object as input to the imported functions.
 ```python
 # Construct step config path
 step_cfg_path = (
@@ -91,9 +91,9 @@ step_main_func(step_cfg_path)
 
 ## Adding modules
 
-To add a new module, simply create a folder inside `src/modules`, e.g., `step3` containing the module code with a `main.py` file.
+To add a new module, simply create a folder inside `src/modules`, e.g., `mod3` containing the module code with a `main.py` file.
 This `main.py`file needs to contain a function called `main` taking a `Path` object as input pointing to a `.yml` file.
 
-Additionally create a folder inside `src/cfg/modules` of the same name (`step3`) in order to store `.yml` configuration files for the module.
+Additionally create a folder inside `src/cfg/modules` of the same name (`mod3`) in order to store `.yml` configuration files for the module.
 
 Now, any config file for the module can be referenced by a run config, which can in turn be selected for execution in the `config.yml`.
