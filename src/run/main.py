@@ -4,9 +4,13 @@ from pathlib import Path
 import yaml
 
 
-def main(cfg: dict) -> None:
+def main(cfg_path: Path) -> None:
+    # Read config
+    with cfg_path.open("r") as file:
+        cfg_dict = yaml.safe_load(file)
+
     # Retrieve steps
-    steps = cfg["steps"]
+    steps = cfg_dict["steps"]
 
     # Iterate through steps
     for step_dict in steps:
@@ -17,7 +21,7 @@ def main(cfg: dict) -> None:
         step_cfg_name = step_dict["config"]
 
         # Create project root path
-        project_root_folder_path = Path(__file__).resolve().parents[2]
+        project_root_folder_path = Path(__file__).parents[2]
 
         # Construct step config path
         step_cfg_path = (
@@ -28,10 +32,6 @@ def main(cfg: dict) -> None:
             / f"{step_cfg_name}.yml"
         )
 
-        # Read step config
-        with open(step_cfg_path, "r") as file:
-            step_cfg = yaml.safe_load(file)
-
         # Construct step main module path
         step_main_module_path = f"src.modules.{step_name}.main"
 
@@ -41,5 +41,5 @@ def main(cfg: dict) -> None:
         # Get step main function
         step_main_func = getattr(step_main_module, "main")
 
-        # Execute main on config
-        step_main_func(step_cfg)
+        # Execute main on config path
+        step_main_func(step_cfg_path)
