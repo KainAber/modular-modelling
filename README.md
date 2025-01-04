@@ -64,7 +64,7 @@ steps:
   - module: mod2
     config: mod2_example
 ```
-The function `src.run.main.main` goes through each step specified in the run config and dynamically imports the `main` functions from `src.modules.<step>.main`.
+The function `src.run.main.main` goes through each step specified in the run config and dynamically imports the `main` functions from `src.modules.<module>.main`.
 It then passes each step config path `cfg/modules/<module>/<config>.yml` as a `Path` object as input to the imported functions.
 ```python
 # Construct step config path
