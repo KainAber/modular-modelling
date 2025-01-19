@@ -13,11 +13,11 @@ def main(cfg_path: Path) -> None:
     # Extract all runs
     run_list = cfg_dict["runs"]
 
+    # Create project root path
+    project_root_folder_path = Path(__file__).parent
+
     # Iterate through runs
     for run_name in run_list:
-        # Create project root path
-        project_root_folder_path = Path(__file__).parent
-
         # Construct run config path
         run_cfg_path = project_root_folder_path / "cfg" / "run" / f"{run_name}.yml"
 

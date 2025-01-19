@@ -12,6 +12,9 @@ def main(cfg_path: Path) -> None:
     # Retrieve steps
     steps = cfg_dict["steps"]
 
+    # Create project root path
+    project_root_folder_path = Path(__file__).parents[2]
+
     # Iterate through steps
     for step_dict in steps:
         # Extract module name
@@ -19,9 +22,6 @@ def main(cfg_path: Path) -> None:
 
         # Extract step cfg
         step_cfg_name = step_dict["config"]
-
-        # Create project root path
-        project_root_folder_path = Path(__file__).parents[2]
 
         # Construct step config path
         step_cfg_path = (
